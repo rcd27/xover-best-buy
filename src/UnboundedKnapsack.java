@@ -25,7 +25,7 @@ public class UnboundedKnapsack {
   public static void main(String[] args) {
     int W = 12;
     int val[] = {20, 30, 70, 90};
-    int wt[] = {1, 2, 4, 8, 5, 7};
+    int wt[] = {1, 2, 4, 8};
     int n = val.length;
     System.out.println(unboundedKnapsack(W, n, val, wt));
   }

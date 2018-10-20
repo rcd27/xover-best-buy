@@ -1,8 +1,8 @@
 import static java.lang.Math.max;
 
 // Java program to find maximum achievable
-// value with a knapsack of weight W and
-// multiple instances allowed.
+// value with a knapsack of weight W and 
+// multiple instances allowed. 
 public class UnboundedKnapsack {
 
   // Returns the maximum value with knapsack
@@ -26,11 +26,11 @@ public class UnboundedKnapsack {
 
   // Driver program
   public static void main(String[] args) {
-    int W = 100;
-    int val[] = {10, 30, 20};
-    int wt[] = {5, 10, 15};
+    int W = 12;
+    int val[] = {20, 30, 70, 90, 1000, 3000};
+    int wt[] = {1, 2, 4, 8, 5,7};
     int n = val.length;
     System.out.println(unboundedKnapsack(W, n, val, wt));
   }
 }
-// This code is contributed by Aditya Kumar
+// This code is contributed by Aditya Kumar  

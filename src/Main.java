@@ -46,7 +46,7 @@ public class Main {
 
     long[] c = new long[n];
     for (int i = 0; i < n; i++) {
-      c[i] = in.nextLong();
+      c[i] = in.nextInt();
     }
 
     // call findHowMuchCentsToSpend function
@@ -55,25 +55,20 @@ public class Main {
     System.out.println(result);
   }
 
-  /**
-   * Complete the function below. DONOT MODIFY anything outside this function!
-   */
-  static long findHowMuchCentsToSpend(int n, int L, long[] c) {
-    long[][] data = fillData(n, L, c); // n - кол-во видов, L- количество литров
-
-    return 150;
-  }
 
   static long[][] fillData(int n, int l, long[] prices) {
-    double liters[] = liters(n);
+    double result11[] = new double[n];
+    for (int i1 = 0; i1 < result11.length; i1++) {
+      result11[i1] = Math.pow(2, i1);
+    }
 
     long[][] result = new long[n][l + 1];
     for (int i = 0; i < result.length; i++) {
-      double stepLength = liters[i];
+      double stepLength = result11[i];
       int currentStep = 0;
       for (int j = 0; j < result[i].length; j++) {
         if (j % stepLength == 0) {
-          result[i][j] = (long) (j / liters[i] * prices[i]);
+          result[i][j] = (long) (j / result11[i] * prices[i]);
           currentStep++;
         } else {
           result[i][j] = currentStep * prices[i];
@@ -83,11 +78,34 @@ public class Main {
     return result;
   }
 
-  static double[] liters(int amountOfBottlesTypes) {
-    double result[] = new double[amountOfBottlesTypes];
-    for (int i = 0; i < result.length; i++) {
-      result[i] = Math.pow(2, i);
+  /**
+   * Complete the function below. DONOT MODIFY anything outside this function!
+   */
+  static long findHowMuchCentsToSpend(int n, int L, long c[]) {
+    long  liters[] = new long[n];
+    for (int i = 0; i < liters.length; i++) {
+      liters[i] = (long) Math.pow(2, i);
     }
-    return result;
+
+    long minimumCost[][] = new long[n + 1][L + 1];
+
+    for (int i = 0; i <= L; i++) { minimumCost[0][i] = Integer.MAX_VALUE; }
+    for (int i = 1; i <= n; i++) { minimumCost[i][0] = 0; }
+
+    for (int i = 1; i <= n; i++) {
+      for (int j = 1; j <= L; j++) {
+        // litters[i-1] > j - if we need less milk than bottle has
+        if (liters[i - 1] > j) {
+          minimumCost[i][j] = minimumCost[i - 1][j];
+        } else {
+          minimumCost[i][j] = Math.min(minimumCost[i - 1][j],
+              minimumCost[i][(int) (j - liters[i - 1])] +
+                  c[i - 1]);
+        }
+      }
+    }
+
+    return (minimumCost[n][L] == Integer.MAX_VALUE) ? -1 :
+        minimumCost[n][L];
   }
 }

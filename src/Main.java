@@ -96,11 +96,10 @@ public class Main {
 
     long minimumCost[][] = new long[n + 1][L + 1];
 
-    for (int i = 0; i <= L; i++) { minimumCost[0][i] = Integer.MAX_VALUE; }
-    for (int i = 1; i <= n; i++) { minimumCost[i][0] = 0; }
-
     for (int i = 1; i <= n; i++) {
+      minimumCost[i][0] = 0;
       for (int j = 1; j <= L; j++) {
+        minimumCost[0][j] = Integer.MAX_VALUE;
         if (liters[i - 1] > j) { // bottle has more liters than we need
           minimumCost[i][j] = Math.min(minimumCost[i - 1][j], c[i - 1]);
         } else {

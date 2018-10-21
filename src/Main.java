@@ -109,7 +109,6 @@ public class Main {
       }
     }
 
-    return (minimumCost[n][L] == Integer.MAX_VALUE) ? -1 :
-        minimumCost[n][L];
+    return minimumCost[n][L];
   }
 }

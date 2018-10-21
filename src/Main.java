@@ -82,7 +82,7 @@ public class Main {
    * Complete the function below. DONOT MODIFY anything outside this function!
    */
   static long findHowMuchCentsToSpend(int n, int L, long c[]) {
-    long  liters[] = new long[n];
+    long liters[] = new long[n];
     for (int i = 0; i < liters.length; i++) {
       liters[i] = (long) Math.pow(2, i);
     }
@@ -94,13 +94,11 @@ public class Main {
 
     for (int i = 1; i <= n; i++) {
       for (int j = 1; j <= L; j++) {
-        // litters[i-1] > j - if we need less milk than bottle has
-        if (liters[i - 1] > j) {
-          minimumCost[i][j] = minimumCost[i - 1][j];
+        if (liters[i - 1] > j) { // bottle has more liters than we need
+          minimumCost[i][j] = Math.min(minimumCost[i - 1][j], c[i - 1]);
         } else {
           minimumCost[i][j] = Math.min(minimumCost[i - 1][j],
-              minimumCost[i][(int) (j - liters[i - 1])] +
-                  c[i - 1]);
+              minimumCost[i][(int) (j - liters[i - 1])] + c[i - 1]);
         }
       }
     }

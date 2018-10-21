@@ -63,7 +63,7 @@ public class MainTest {
     assertThat(result).isEqualTo(expected);
   }
 
-  /*
+
   @Test
   public void testLongs() {
     long result = Main.findHowMuchCentsToSpend(5, 787787787,
@@ -72,5 +72,4 @@ public class MainTest {
 
     assertThat(result).isEqualTo(expected);
   }
-  */
 }

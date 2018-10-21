@@ -83,8 +83,15 @@ public class Main {
    */
   static long findHowMuchCentsToSpend(int n, int L, long c[]) {
     long liters[] = new long[n];
+    // Some optimization instead of using Math.pow() in each iteration
+    int previousPow = 1;
     for (int i = 0; i < liters.length; i++) {
-      liters[i] = (long) Math.pow(2, i);
+      if (i == 0) {
+        liters[i] = 1;
+      } else {
+        liters[i] = previousPow * 2;
+        previousPow *= 2;
+      }
     }
 
     long minimumCost[][] = new long[n + 1][L + 1];

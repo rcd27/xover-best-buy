@@ -32,7 +32,20 @@ public class ContinuousKnapsack {
       }
     }
 
-    return 100;
+    int curWeight = 0;
+    long finalValue = 0;
+
+    for (int i = 0; i < n; i++) {
+      if (curWeight + w[i] <= W) {
+        curWeight += w[i];
+        finalValue += v[i];
+      } else {
+        // if we can't add bottle, add the best fit to full knapsack
+      }
+    }
+    // {1, 1, 1, 0} is the result of above
+
+    return finalValue;
   }
 
 

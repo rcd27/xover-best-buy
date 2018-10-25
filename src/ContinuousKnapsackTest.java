@@ -11,6 +11,7 @@ public class ContinuousKnapsackTest {
   @Test
   public void mainTest() {
     long result = ContinuousKnapsack.findHowMuchCentsToSpend(n, L, prices);
+    assertThat(result).isEqualTo(150);
   }
 
   @Test

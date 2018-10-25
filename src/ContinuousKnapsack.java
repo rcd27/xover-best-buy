@@ -35,16 +35,20 @@ public class ContinuousKnapsack {
     int curWeight = 0;
     long finalValue = 0;
 
+    // utils
+    long[] chromosome = new long[4];
+
     for (int i = 0; i < n; i++) {
       if (curWeight + w[i] <= W) {
         curWeight += w[i];
         finalValue += v[i];
+        chromosome[i] += 1;
       } else {
         // if we can't add bottle, add the best fit to full knapsack
+
       }
     }
-    // {1, 1, 1, 0} is the result of above
-
+    // chromosome = {1,1,0,1}
     return finalValue;
   }
 

@@ -1,7 +1,7 @@
 import java.io.IOException;
 import java.util.Scanner;
 
-public class Main {
+public class Dynamic {
 
   /*
     Магазин продаёт молоко в бутылках, `n` разных вместимостей за разные цены
@@ -53,29 +53,6 @@ public class Main {
     long result = findHowMuchCentsToSpend(n, L, c);
 
     System.out.println(result);
-  }
-
-
-  static long[][] fillData(int n, int l, long[] prices) {
-    double result11[] = new double[n];
-    for (int i1 = 0; i1 < result11.length; i1++) {
-      result11[i1] = Math.pow(2, i1);
-    }
-
-    long[][] result = new long[n][l + 1];
-    for (int i = 0; i < result.length; i++) {
-      double stepLength = result11[i];
-      int currentStep = 0;
-      for (int j = 0; j < result[i].length; j++) {
-        if (j % stepLength == 0) {
-          result[i][j] = (long) (j / result11[i] * prices[i]);
-          currentStep++;
-        } else {
-          result[i][j] = currentStep * prices[i];
-        }
-      }
-    }
-    return result;
   }
 
   /**

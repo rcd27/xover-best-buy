@@ -5,20 +5,19 @@ public class ContinuousKnapsack {
     long[] v = c; // length = n
     int W = L;
 
-    double[] p = new double[n];
+    double[] r = new double[n];
     for (int i = 0; i < n; i++) {
-      double currentP = (double) v[i] / w[i];
-      p[i] = currentP;
+      r[i] = (double) v[i] / w[i];
     }
 
-    // Bubble sort
+    // Bubble sort according to value per unit weight
     for (int i = 0; i < n - 1; i++) {
       for (int j = 0; j < n - i - 1; j++) {
-        if (p[j] > p[j + 1]) {
-          // sort p[i]
-          double tempP = p[j];
-          p[j] = p[j + 1];
-          p[j + 1] = tempP;
+        if (r[j] > r[j + 1]) {
+          // sort r[i]
+          double tempR = r[j];
+          r[j] = r[j + 1];
+          r[j + 1] = tempR;
 
           // sort w[i]
           long tempW = w[j];

@@ -32,16 +32,26 @@ public class ContinuousKnapsack {
 
     int curWeight = 0;
     long currentValue = 0;
+    int currentBottle = 0;
 
-    long amountOfCheapestBottlesFit = L / w[0];
-    if (amountOfCheapestBottlesFit >= 1) {
-      currentValue += c[0] * amountOfCheapestBottlesFit;
-      curWeight += w[0] * amountOfCheapestBottlesFit;
-      c[0] = Integer.MAX_VALUE; // sort out current bottle type
-      return currentValue + findHowMuchCentsToSpend(n - 1, L - curWeight, c);
-    } else {
-      return 0;
+    while (curWeight < L) {
+      long amountOfCheapestBottlesFit = (L - curWeight) / w[currentBottle];
+      if (amountOfCheapestBottlesFit >= 1) {
+        currentValue += c[currentBottle] * amountOfCheapestBottlesFit;
+        curWeight += w[currentBottle] * amountOfCheapestBottlesFit;
+        currentBottle++;
+      } else {
+        if (curWeight == 0) {
+          currentValue += c[currentBottle];
+          curWeight += w[currentBottle];
+        } else {
+          // I don't know
+          currentValue += 0;
+          curWeight += w[currentBottle];
+        }
+      }
     }
+    return currentValue;
   }
 
   static double[] bubbleSort(double[] x) {

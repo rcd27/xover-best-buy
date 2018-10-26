@@ -2,12 +2,10 @@ public class ContinuousKnapsack {
 
   static long findHowMuchCentsToSpend(int n, int L, long c[]) {
     long[] w = Utils.liters(n); // length = n
-    long[] v = c; // length = n
-    int W = L;
 
     double[] r = new double[n];
     for (int i = 0; i < n; i++) {
-      r[i] = (double) v[i] / w[i];
+      r[i] = (double) c[i] / w[i];
     }
 
     // Bubble sort according to value per unit weight
@@ -25,33 +23,26 @@ public class ContinuousKnapsack {
           w[j + 1] = tempW;
 
           // sort v[i]
-          long tempV = v[j];
-          v[j] = v[j + 1];
-          v[j + 1] = tempV;
+          long tempV = c[j];
+          c[j] = c[j + 1];
+          c[j + 1] = tempV;
         }
       }
     }
 
     int curWeight = 0;
-    long finalValue = 0;
+    long currentValue = 0;
 
-    // utils
-    long[] chromosome = new long[4];
-
-    for (int i = 0; i < n; i++) {
-      if (curWeight + w[i] <= W) {
-        curWeight += w[i];
-        finalValue += v[i];
-        chromosome[i] += 1;
-      } else {
-        // if we can't add bottle, add the best fit to full knapsack
-
-      }
+    long amountOfCheapestBottlesFit = L / w[0];
+    if (amountOfCheapestBottlesFit >= 1) {
+      currentValue += c[0] * amountOfCheapestBottlesFit;
+      curWeight += w[0] * amountOfCheapestBottlesFit;
+      c[0] = Integer.MAX_VALUE; // sort out current bottle type
+      return currentValue + findHowMuchCentsToSpend(n - 1, L - curWeight, c);
+    } else {
+      return 0;
     }
-    // chromosome = {1,1,0,1}
-    return finalValue;
   }
-
 
   static double[] bubbleSort(double[] x) {
     int n = x.length;

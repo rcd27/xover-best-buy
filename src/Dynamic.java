@@ -71,6 +71,10 @@ public class Dynamic {
       }
     }
 
+    // Найти количество целых бутылок с минимальной стоимостью
+    // Запомнить их суммарную стоимость
+    // Вернуть curTotal + findHomMuchCentsToSpend(int n-1, L-curL, long c1[n-1]
+
     long minimumCost[][] = new long[n + 1][L + 1];
 
     for (int i = 1; i <= n; i++) {

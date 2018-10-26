@@ -18,7 +18,7 @@ public class ContinuousKnapsackTest {
   public void testLongs() {
     long result = ContinuousKnapsack.findHowMuchCentsToSpend(5, 787787787,
         new long[]{123456789, 234567890, 345678901, 456789012, 987654321});
-    long expected = 44981600439878676L;
+    long expected = 44981600785557577L;
 
     AssertionsForClassTypes.assertThat(result).isEqualTo(expected);
   }

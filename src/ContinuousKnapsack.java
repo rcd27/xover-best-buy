@@ -45,14 +45,20 @@ public class ContinuousKnapsack {
     int currentBottle = 0;
 
     while (curWeight < L) {
-      long amountOfCheapestBottlesFit = (L - curWeight) / w[currentBottle];
+      int remainingWeight = L - curWeight;
+      long amountOfCheapestBottlesFit = remainingWeight / w[currentBottle];
+      long currentBottleValue = c[currentBottle];
       if (amountOfCheapestBottlesFit >= 1) {
-        currentValue += c[currentBottle] * amountOfCheapestBottlesFit;
+        currentValue += currentBottleValue * amountOfCheapestBottlesFit;
         curWeight += w[currentBottle] * amountOfCheapestBottlesFit;
+      }
+      if (remainingWeight < w[currentBottle]) {
+        // pick 1 current bottle or 2 next bottle types if they are cheaper
+        // FIXME: we can also need 1 bottle of next type. Figure out that '2'
+        long bestPrice = Math.min(c[currentBottle], 2 * c[currentBottle + 1]);
+        currentValue += bestPrice;
+        curWeight += remainingWeight;
         currentBottle++;
-      } else {
-          currentValue += c[2]; // FIXME: hard-code.
-          curWeight += w[2];
       }
     }
     return currentValue;

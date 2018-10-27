@@ -45,6 +45,7 @@ public class ContinuousKnapsack {
     int currentBottle = 0;
 
     while (curWeight < L) {
+      // Use greedy algorithm
       int remainingWeight = L - curWeight;
       long amountOfCheapestBottlesFit = remainingWeight / w[currentBottle];
       long currentBottleValue = c[currentBottle];
@@ -52,15 +53,26 @@ public class ContinuousKnapsack {
         currentValue += currentBottleValue * amountOfCheapestBottlesFit;
         curWeight += w[currentBottle] * amountOfCheapestBottlesFit;
       }
+      // Find best price for remaining weight using dynamic approach
       if (remainingWeight < w[currentBottle]) {
-        // pick 1 current bottle or 2 next bottle types if they are cheaper
-        // FIXME: we can also need 1 bottle of next type. Figure out that '2'
-        long bestPrice = Math.min(c[currentBottle], 2 * c[currentBottle + 1]);
-        currentValue += bestPrice;
-        curWeight += remainingWeight;
-        currentBottle++;
+        long minimumCost[][] = new long[n + 1][remainingWeight + 1];
+        for (int i = 1; i <= n; i++) {
+          for (int j = 1; j <= remainingWeight; j++) {
+            minimumCost[0][j] = Integer.MAX_VALUE;
+            if (w[i - 1] > j) { // bottle has more liters than we need
+              minimumCost[i][j] = Math.min(minimumCost[i - 1][j], c[i - 1]);
+            } else {
+              minimumCost[i][j] = Math.min(minimumCost[i - 1][j],
+                  minimumCost[i][(int) (j - w[i - 1])] + c[i - 1]);
+            }
+          }
+        }
+
+        long bestPrice = minimumCost[n][remainingWeight];
+        return currentValue + bestPrice;
       }
     }
+
     return currentValue;
   }
 

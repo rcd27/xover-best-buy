@@ -58,7 +58,7 @@ public class ContinuousKnapsack {
         long minimumCost[][] = new long[n + 1][remainingWeight + 1];
         for (int i = 1; i <= n; i++) {
           for (int j = 1; j <= remainingWeight; j++) {
-            minimumCost[0][j] = Integer.MAX_VALUE;
+            minimumCost[0][j] = Long.MAX_VALUE;
             if (w[i - 1] > j) { // bottle has more liters than we need
               minimumCost[i][j] = Math.min(minimumCost[i - 1][j], c[i - 1]);
             } else {

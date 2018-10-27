@@ -51,7 +51,7 @@ public class ContinuousKnapsack {
         curWeight += w[currentBottle] * amountOfCheapestBottlesFit;
         currentBottle++;
       } else {
-          currentValue += c[2]; // not current, but best fit amount!
+          currentValue += c[2]; // FIXME: hard-code.
           curWeight += w[2];
       }
     }
